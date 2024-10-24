@@ -1,19 +1,19 @@
-# Project Repository
+# EasyNote
 
-This repository will be used for team projects.
+## Product Vision Statement
 
-Several sets of instructions are included in this repository. They should each be treated as separate assignments with their own due dates and sets of requirements.
+Our vision is to empower students with an AI-driven note-taking app that transforms how they capture and manage academic content. By integrating deadline tracking and to-do functionalities, alongside advanced AI features like lecture transcription and automated note organization, we aim to streamline the learning process. This app will help students stay on top of their academic responsibilities, keep track of all due dates, and efficiently organize their study materials, ultimately enhancing their educational success.
 
-1. See the [App Map & Wireframes](instructions-0a-app-map-wireframes.md) and [Prototyping](./instructions-0b-prototyping.md) instructions for the requirements of the initial user experience design of the app.
+## Core Team Members
 
-1. Delete the contents of this file and replace with the contents of a proper README.md, as described in the [project setup instructions](./instructions-0c-project-setup.md)
+@AndrewJ1234 @DanKhaitov @GavinZhengOI @zuyan
 
-1. See the [Sprint Planning instructions](instructions-0d-sprint-planning.md) for the requirements of Sprint Planning for each Sprint.
 
-1. See the [Front-End Development instructions](./instructions-1-front-end.md) for the requirements of the initial Front-End Development.
+## Building and Testing
 
-1. See the [Back-End Development instructions](./instructions-2-back-end.md) for the requirements of the initial Back-End Development.
+This section is a placeholder for instructions on building and testing the project. Detailed steps will be provided in future updates.
 
-1. See the [Database Integration instructions](./instructions-3-database.md) for the requirements of integrating a database into the back-end.
+## Contributing
 
-1. See the [Deployment instructions](./instructions-4-deployment.md) for the requirements of deploying an app.
+Please see the [Contributing Guidelines](CONTRIBUTING.md) for detailed instructions on how to contribute to this project.
+
