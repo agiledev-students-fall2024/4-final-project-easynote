@@ -3,6 +3,5 @@ services:
 - name: backend
   image:
     registry_type: DOCR
-    registry: registry.digitalocean.com/agile
     repository: agile/backend
     digest: ${SAMPLE_DIGEST}
