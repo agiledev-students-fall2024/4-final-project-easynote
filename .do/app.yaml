@@ -2,6 +2,7 @@ name: easynote
 services:
 - name: backend
   image:
+    registry_type: DOCR
     registry: registry.digitalocean.com
     repository: agile/backend
     digest: ${SAMPLE_DIGEST}
