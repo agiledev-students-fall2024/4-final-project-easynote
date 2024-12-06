@@ -34,7 +34,7 @@ jobs:
       with:
         registry: registry.digitalocean.com
         username: do-oauth2-registry-token
-        password: ${{ secrets.DO_TOKEN }}
+        password: ${{ secrets.DO_TOKEN_REG }}
 
     - name: Build and Push Docker Image
       uses: docker/build-push-action@v4
