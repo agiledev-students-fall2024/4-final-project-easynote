@@ -1,0 +1,7 @@
+name: easynote
+services:
+- name: backend
+  image:
+    registry: registry.digitalocean.com
+    repository: agile/backend
+    digest: ${SAMPLE_DIGEST}
