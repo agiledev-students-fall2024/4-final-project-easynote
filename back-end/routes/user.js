@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
 
       try {
         await user.save();
-
+        console.log("register succeed!");
         const token = jwt.sign(
           { userId: user._id, email: user.email },
           JWT_SECRET,
@@ -61,6 +61,10 @@ router.post('/', async (req, res) => {
         res.status(201).send({
           message: 'User registered successfully',
           token, 
+          username: user.username,  
+          email:user.email,  
+          occupation: user.occupation,  
+          studying: user.studying
         });
       } catch (err) {
         res.status(500).send(`Error saving user to database: ${err.message}`);

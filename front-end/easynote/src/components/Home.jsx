@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import { Link } from 'react-router-dom';
 import { useProfile } from './ProfileContext';
 
@@ -34,14 +34,52 @@ const mockNotes = [
 ];
 
 const Home = () => {
-  const { user } = useProfile();
-  console.log('Current user:', user); // Debug line to check user data
-  
-  // Only filter by author if user is logged in, otherwise show all recent notes
-  const recentNotes = mockNotes
-    .filter(note => !user?.email || note.author === user.email)
-    .sort((a, b) => new Date(b.lastModified) - new Date(a.lastModified))
-    .slice(0, 5); 
+  const { user } = useProfile(); 
+  console.log('Current user:', user); 
+  const [recentNotes, setRecentNotes] = useState([]); 
+  const [errorMessage, setErrorMessage] = useState(""); 
+  const [loading, setLoading] = useState(true); 
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const token = localStorage.getItem('token');
+
+      try {
+        //const response = await fetch('http://localhost:5000/notes', {
+        const response = await fetch('https://easynote-aivlj.ondigitalocean.app/api/notes', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`, 
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          console.log("Recent post:", data);
+          const filteredNotes = data
+            .filter(note => !user?.email || note.author.email === user.email) 
+            .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)) 
+            .slice(0, 5);
+          
+          setRecentNotes(filteredNotes); 
+        } else {
+          throw new Error('Failed to fetch notes');
+        }
+      } catch (error) {
+        setErrorMessage(error.message); 
+      } finally {
+        setLoading(false); 
+      }
+    };
+
+    fetchNotes(); 
+  }, [user]); 
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
 
   return (
     <section className="home-view">

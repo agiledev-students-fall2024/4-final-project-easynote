@@ -14,17 +14,17 @@ router.post('/', async (req, res) => {
     await User.findOne({ email })
     .then(user => {
         if (!user) {
-            res.json({ 'Error': 'User not found'}); 
+            return res.json({ 'Error': 'User not found'}); 
         }
     
         bcrypt.compare(password, user.password, (err, isMatch) => {
           if (err) {
-            res.json({ 'Error': 'Error comparing passwords'}); 
+            return res.json({ 'Error': 'Error comparing passwords'}); 
           }
     
           if (isMatch) {
             const token = jwt.sign({ id: user._id }, USER_SECRET, { expiresIn: '24h' });
-            res.json({ token });        
+            return res.status(200).json({username: user.username,  email:user.email,  occupation: user.occupation,  studying: user.studying, token });        
           } else {
             res.json({ 'Error': 'Invalid passwords'}); 
           }
