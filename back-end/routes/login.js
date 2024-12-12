@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     
           if (isMatch) {
             const token = jwt.sign({ id: user._id }, USER_SECRET, { expiresIn: '24h' });
-            res.json({ token });        
+            res.status(200).json({username: user.username,  email:user.email,  occupation: user.occupation,  studying: user.studying, token });        
           } else {
             res.json({ 'Error': 'Invalid passwords'}); 
           }
