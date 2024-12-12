@@ -15,7 +15,7 @@ const Login = () => {
     const loginResponse = await handleLogin(email, password);
         
     if (loginResponse.success) {
-        setUser({ email: loginResponse.email });
+        setUser({ username:loginResponse.username, email: loginResponse.email, occupation: loginResponse.occupation, studying: loginResponse.studying  });
         navigate('/');
     } else {
         alert('Login failed');

@@ -50,14 +50,16 @@ const SignUp = () => {
           "Content-Type": "application/json"
         }
       });
-
+      const resp = response.data; 
+      const { username, email, occupation, studying, token } = resp;
+      console.log("register:", username, email, occupation, studying, token);
       // Check if registration is successful
-      if (response.data.token) {
+      if (token) {
         // Save token to localStorage
         localStorage.setItem('authToken', response.data.token);
 
         // Set the user in ProfileContext (if needed)
-        setUser({ email: formData.email });
+        setUser({ username, email, occupation, studying });
 
         // Navigate to the homepage
         navigate('/');
