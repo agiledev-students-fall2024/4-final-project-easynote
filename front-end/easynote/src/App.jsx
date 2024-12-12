@@ -11,7 +11,6 @@ import AuthGuard from './components/AuthGuard';
 import EditNote from './components/EditNote';
 import ViewNote from './components/ViewNote';
 import Transcription from './components/Transcription';
-import ViewProfile from './components/ViewProfile';
 
 
 const App = () => {
@@ -43,14 +42,6 @@ const App = () => {
               element={
                 <AuthGuard>
                   <ExistingNotes />
-                </AuthGuard>
-              }
-            />
-            <Route
-              path="view-profile"
-              element={
-                <AuthGuard>
-                  <ViewProfile />
                 </AuthGuard>
               }
             />
