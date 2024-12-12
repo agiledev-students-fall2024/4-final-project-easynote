@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { useProfile } from './ProfileContext';
-import logo from '../images/notebook-logo.png';
-
-
 
 const Layout = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -14,20 +11,21 @@ const Layout = () => {
   const navRef = useRef(null);
 
   useEffect(() => {
+    // Check if the device is mobile
     const isMobileDevice = () => {
       return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     };
 
     setIsMobile(isMobileDevice());
 
+    // Add event listener to detect window resize
     const handleResize = () => {
       setIsMobile(isMobileDevice());
     };
 
-
-
     window.addEventListener('resize', handleResize);
 
+    // Cleanup the event listener
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -42,16 +40,10 @@ const Layout = () => {
     navigate('/login');
   };
 
-  const handleViewProfile = () => {
-    navigate('/view-profile');
-  };
-
-  const handleLogoClick = () => {
-    navigate('/'); 
-  };
-
+  // Close navigation when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
+      // Check if the click is outside the navigation sidebar and menu icon
       if (
         navRef.current && 
         !navRef.current.contains(event.target) && 
@@ -61,10 +53,12 @@ const Layout = () => {
       }
     };
 
+    // Add event listener when nav is open
     if (isNavOpen) {
       document.addEventListener('mousedown', handleClickOutside);
     }
 
+    // Cleanup the event listener
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -79,9 +73,7 @@ const Layout = () => {
         >
           {isNavOpen ? '✕' : '☰'}
         </div>
-        <button className="logo" onClick={handleLogoClick}>
-          <img src={logo} className="logo-image" alt="Notebook Logo" />
-        </button>
+        <div className="logo"></div>
         <div className="profile-section">
           {user?.profilePicture ? (
             <img
@@ -98,27 +90,17 @@ const Layout = () => {
           )}
           {isProfileOpen && (
             <div className={`profile-dropdown ${isMobile ? 'mobile-profile-dropdown' : ''}`}>
-             {console.log("Hello===>",user)}
               <div className="profile-dropdown-item">
-              <strong>Hello, {user.username}!</strong>
+                <strong>{user?.name}</strong>
               </div>
               <div className="profile-dropdown-item">
-                Occupation: {user?.occupation}
+                {user?.occupation}
               </div>
               <div className="profile-dropdown-item">
                 Studying: {user?.studying}
               </div>
-              <div className="profile-dropdown-item">
-                <button 
-                className="view-profile-btn" 
-                  onClick={handleViewProfile}
-            >
-              View Profile
-            </button>
-              </div>
-            
-              <div className="profile-dropdown-item">
-                <button onClick={handleLogout}>Logout</button>
+              <div className="profile-dropdown-item" onClick={handleLogout}>
+                Logout
               </div>
             </div>
           )}
